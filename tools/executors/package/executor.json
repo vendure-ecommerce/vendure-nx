@@ -1,0 +1,9 @@
+{
+  "executors": {
+    "package": {
+      "implementation": "./packageImpl",
+      "schema": "./package-schema.json",
+      "description": "Generates a package.json for the app or plugin"
+    }
+  }
+}
