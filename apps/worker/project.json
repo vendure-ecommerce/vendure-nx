@@ -10,8 +10,7 @@
       "options": {
         "outputPath": "dist/apps/worker",
         "main": "apps/worker/src/main.ts",
-        "tsConfig": "apps/worker/tsconfig.app.json",
-        "assets": ["apps/worker/src/assets"]
+        "tsConfig": "apps/worker/tsconfig.app.json"
       },
       "configurations": {
         "production": {
