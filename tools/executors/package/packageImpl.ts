@@ -1,8 +1,8 @@
 import { ExecutorContext, readJsonFile, writeJsonFile } from '@nrwl/devkit';
 import { readCachedProjectGraph } from '@nx/workspace/src/core/project-graph';
-import { createPackageJson } from '@nx/workspace/src/utilities/create-package-json';
 import * as fs from 'fs';
 import * as path from 'path';
+import { createPackageJson } from 'nx/src/plugins/js/package-json/create-package-json';
 
 interface PackageOptions {
   /**
