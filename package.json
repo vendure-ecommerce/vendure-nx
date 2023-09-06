@@ -19,7 +19,7 @@
     "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
-    "@vendure/testing": "~1.7.4",
+    "@vendure/testing": "^2.0.6",
     "eslint": "8.46.0",
     "eslint-config-prettier": "8.1.0",
     "jest": "29.4.3",
