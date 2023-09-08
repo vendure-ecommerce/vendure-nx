@@ -5,12 +5,14 @@
   "projectType": "application",
   "targets": {
     "build-app": {
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/worker",
         "main": "apps/worker/src/main.ts",
-        "tsConfig": "apps/worker/tsconfig.app.json"
+        "tsConfig": "apps/worker/tsconfig.app.json",
+        "compiler": "tsc",
+        "target": "node"
       },
       "configurations": {
         "production": {
@@ -50,21 +52,21 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/node:node",
+      "executor": "@nx/js:node",
       "options": {
         "buildTarget": "worker:build-app"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/worker/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/worker"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/worker"],
       "options": {
         "jestConfig": "apps/worker/jest.config.ts",
         "passWithNoTests": true
