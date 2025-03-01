@@ -37,7 +37,7 @@
     "sharedGlobals": []
   },
   "defaultProject": "server",
-  "nxCloudId": "67c35931ee0ad95d59440a49",
   "useInferencePlugins": false,
-  "defaultBase": "master"
+  "defaultBase": "master",
+  "useLegacyCache": true
 }
