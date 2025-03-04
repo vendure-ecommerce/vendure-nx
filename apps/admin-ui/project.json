@@ -13,18 +13,14 @@
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/admin-ui/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/admin-ui"],
       "options": {
-        "jestConfig": "apps/admin-ui/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/admin-ui/jest.config.ts"
       }
     }
   },

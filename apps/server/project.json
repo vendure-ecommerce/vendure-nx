@@ -4,100 +4,99 @@
   "sourceRoot": "apps/server/src",
   "projectType": "application",
   "targets": {
-    "build-app": {
-      "executor": "@nx/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/apps/server",
-        "main": "apps/server/src/main.ts",
-        "tsConfig": "apps/server/tsconfig.app.json",
-        "compiler": "tsc",
-        "target": "node"
-      },
-      "configurations": {
-        "production": {
-          "optimization": true,
-          "extractLicenses": true,
-          "inspect": false
-        }
-      }
-    },
-    "migration": {
-      "executor": "nx:run-commands",
-      "options": {
-        "parallel": false,
-        "commands": [
-          "yarn ts-node -r tsconfig-paths/register --project apps/server/tsconfig.app.json apps/server/src/migration.ts",
-          "nx run server:transpile-migrations"
-        ]
-      }
-    },
-    "transpile-migrations": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          {
-            "command": "yarn tsc --project apps/server/tsconfig.migrations.json",
-            "forwardAllArgs": false
+      "build-app": {
+          "executor": "@nx/webpack:webpack",
+          "outputs": ["{options.outputPath}"],
+          "defaultConfiguration": "production",
+          "options": {
+              "target": "node",
+              "compiler": "tsc",
+              "outputPath": "dist/apps/server",
+              "main": "apps/server/src/main.ts",
+              "tsConfig": "apps/server/tsconfig.app.json",
+              "assets": ["apps/server/src/assets"],
+              "webpackConfig": "apps/server/webpack.config.js"
+          },
+          "configurations": {
+              "development": {},
+              "production": {}
           }
-        ]
+      },
+      "migration": {
+          "executor": "nx:run-commands",
+          "options": {
+              "parallel": false,
+              "commands": [
+                  "npx ts-node -r tsconfig-paths/register --project apps/server/tsconfig.app.json apps/server/src/migration.ts",
+                  "nx run server:transpile-migrations"
+              ]
+          }
+      },
+      "transpile-migrations": {
+          "executor": "nx:run-commands",
+          "options": {
+              "commands": [
+                  {
+                      "command": "npx tsc --project apps/server/tsconfig.migrations.json",
+                      "forwardAllArgs": false
+                  }
+              ]
+          }
+      },
+      "package": {
+          "executor": "./tools/executors/package:package",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+              "outputPath": "dist/apps/server",
+              "omit": [
+                  "^@angular",
+                  "zone.js",
+                  "^@vendure/admin-ui$",
+                  "@vendure/ui-devkit",
+                  "ngx-color-picker",
+                  "codejar",
+                  "apollo-angular",
+                  "@apollo/client"
+              ],
+              "include": ["bullmq", "^pg$", "aws-sdk", "@nestjs/terminus"]
+          }
+      },
+      "build": {
+          "executor": "nx:run-commands",
+          "options": {
+              "commands": [
+                  "nx run server:build-app",
+                  "nx run server:transpile-migrations",
+                  "nx run server:package"
+              ],
+              "parallel": false
+          }
+      },
+      "prepare-deployment": {
+          "executor": "nx:run-commands",
+          "options": {
+              "cwd": "dist/apps/server",
+              "commands": ["npm install"]
+          }
+      },
+      "serve": {
+          "executor": "@nx/js:node",
+          "options": {
+              "buildTarget": "server:build-app",
+              "waitUntilTargets": ["server:transpile-migrations"]
+          }
+      },
+      "lint": {
+          "executor": "@nx/eslint:lint",
+          "outputs": ["{options.outputFile}"]
+      },
+      "test": {
+          "executor": "@nx/jest:jest",
+          "outputs": ["{workspaceRoot}/coverage/apps/server"],
+          "options": {
+              "jestConfig": "apps/server/jest.config.ts"
+          }
       }
-    },
-    "package": {
-      "executor": "./tools/executors/package:package",
-      "outputs": ["{options.outputPath}"],
-      "options": {
-        "outputPath": "dist/apps/server",
-        "omit": [
-          "^@angular",
-          "zone.js",
-          "@vendure/ui-devkit",
-          "apollo-angular",
-          "@apollo/client"
-        ],
-        "include": ["bullmq", "^pg$", "aws-sdk"]
-      }
-    },
-    "build": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          "nx run server:build-app",
-          "nx run server:transpile-migrations",
-          "nx run server:package"
-        ],
-        "parallel": false
-      }
-    },
-    "prepare-deployment": {
-      "executor": "nx:run-commands",
-      "options": {
-        "cwd": "dist/apps/server",
-        "commands": ["yarn"]
-      }
-    },
-    "serve": {
-      "executor": "@nx/js:node",
-      "options": {
-        "buildTarget": "server:build-app",
-        "waitUntilTargets": ["server:transpile-migrations"]
-      }
-    },
-    "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/server/**/*.ts"]
-      }
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/apps/server"],
-      "options": {
-        "jestConfig": "apps/server/jest.config.ts",
-        "passWithNoTests": true
-      }
-    }
   },
   "tags": []
 }
