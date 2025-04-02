@@ -1,0 +1,19 @@
+{
+  "executors": {
+    "generate-plugin-types": {
+      "implementation": "./generatePluginTypesImpl",
+      "schema": "./generate-plugin-types-schema.json",
+      "description": "Generate TypeScript types from GraphQL schema & operations for plugins"
+    },
+    "generate-storefront-types": {
+      "implementation": "./generateStorefrontTypesImpl",
+      "schema": "./generate-storefront-types-schema.json",
+      "description": "Generate TypeScript types from GraphQL schema & operations for storefront"
+    },
+    "generate-pos-types": {
+      "implementation": "./generatePosTypesImpl",
+      "schema": "./generate-pos-types-schema.json",
+      "description": "Generate TypeScript types from GraphQL schema & operations for pos"
+    }
+  }
+}

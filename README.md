@@ -6,9 +6,9 @@ This is an example of how you can build and deploy a [Vendure](https://www.vendu
 
 Currently, this is a bare-bones example based on a successful setup I have been using on one of my own projects. Here are some missing parts that could be filled in to make the example more complete:
 
-- [] Code generation with [graphql-code-generator](https://github.com/dotansimha/graphql-code-generator)
-- [] An example plugin with ui extensions and e2e testing setup
-- [] A custom generator for scaffolding new plugins
+- [x] Code generation with [graphql-code-generator](https://github.com/dotansimha/graphql-code-generator)
+- [x] An example plugin with ui extensions and e2e testing setup
+- [x] A custom generator for scaffolding new plugins
 
 **Contributions are very welcome!**
 

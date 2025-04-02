@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "vendure-plugin-generator": {
+      "factory": "./src/generators/vendure-plugin-generator",
+      "schema": "./src/generators/schema.json",
+      "description": "Create a Vendure plugin with a given name and options.",
+    }
+  }
+}

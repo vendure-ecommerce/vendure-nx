@@ -1,0 +1,24 @@
+{
+  "name": "util-testing",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/util-testing/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "build-lib": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/util-testing",
+        "tsConfig": "libs/util-testing/tsconfig.lib.json",
+        "packageJson": "libs/util-testing/package.json",
+        "main": "libs/util-testing/src/index.ts",
+        "assets": []
+      }
+    }
+  }
+}

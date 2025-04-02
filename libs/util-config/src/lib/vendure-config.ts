@@ -13,8 +13,9 @@ import {
   configureS3AssetStorage,
 } from '@vendure/asset-server-plugin';
 import { BullMQJobQueuePlugin } from '@vendure/job-queue-plugin/package/bullmq';
+import { ExamplePlugin } from '@vendure-nx/plugin-example';
 
-const PORT = +(process.env.API_INTERNAL_PORT as string);
+const PORT = +((process.env.API_INTERNAL_PORT ?? 3000).toString());
 const assetUrlPrefix =
   process.env.ASSET_URL_PREFIX ||
   `${process.env.API_PUBLIC_URL}:${process.env.API_PUBLIC_PORT}/vendure-assets/`;
@@ -28,13 +29,9 @@ export const config: VendureConfig = {
   },
   authOptions: {
     requireVerification: true,
-    tokenMethod: ['bearer', 'cookie'],
+    tokenMethod: ['bearer', process.env.COOKIE_SECRET ? 'cookie' : undefined],
     cookieOptions: {
       secret: process.env.COOKIE_SECRET,
-    },
-    superadminCredentials: {
-      identifier: process.env.SUPERADMIN_IDENTIFIER,
-      password: process.env.SUPERADMIN_PASSWORD,
     },
   },
   dbConnectionOptions: {
@@ -82,13 +79,14 @@ export const config: VendureConfig = {
     BullMQJobQueuePlugin.init({
       connection: {
         host: process.env.REDIS_HOST ?? '127.0.0.1',
-        port: +process.env.NF_REDIS_PORT ?? 6379,
+        port: +process.env.REDIS_PORT ?? 6379,
         password: process.env.REDIS_PASSWORD ?? null,
       },
       queueOptions: {
         defaultJobOptions: {},
       },
     }),
+    ExamplePlugin,
   ],
 };
 

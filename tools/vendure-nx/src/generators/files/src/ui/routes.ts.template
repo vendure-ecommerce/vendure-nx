@@ -1,0 +1,10 @@
+import { registerRouteComponent } from '@vendure/admin-ui/core';
+
+export default [
+/*
+    registerRouteComponent({
+        path: '<%= filename %>',
+        component: <%= titlecase(name) %>Component,
+    }),
+*/
+];

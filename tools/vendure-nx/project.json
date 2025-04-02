@@ -1,0 +1,7 @@
+{
+  "name": "vendure-nx",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "tools/vendure-nx/src",
+  "projectType": "library",
+  "tags": []
+}

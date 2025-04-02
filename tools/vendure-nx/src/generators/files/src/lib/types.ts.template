@@ -1,0 +1,7 @@
+/**
+ * @description
+ * The plugin can be configured using the following options:
+ */
+export interface <%= titlecase(name) %>PluginInitOptions {
+  exampleOption?: string;
+}

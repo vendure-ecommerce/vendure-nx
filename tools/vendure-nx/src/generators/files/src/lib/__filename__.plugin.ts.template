@@ -1,0 +1,41 @@
+import { Inject } from '@nestjs/common';
+import { PluginCommonModule, VendurePlugin } from '@vendure/core';
+
+<% if(uiExtension) { %>
+import { uiExtensions } from '../ui';
+<% } %>
+
+import { <%= uppercase(name) %>_PLUGIN_OPTIONS } from './constants';
+import { <%= titlecase(name) %>PluginInitOptions } from './types';
+
+
+@VendurePlugin({
+    imports: [PluginCommonModule],
+    entities: [],
+    providers: [
+        {
+            provide: <%= uppercase(name) %>_PLUGIN_OPTIONS,
+            useFactory: () => <%= titlecase(name) %>Plugin.options,
+        },
+    ],
+    configuration: (config) => {
+        // Add configuration here
+        return config;
+    },
+    compatibility: '^3.0.0',
+})
+export class <%= titlecase(name) %>Plugin {
+    <% if(uiExtension) { %>
+    static uiExtensions = uiExtensions;
+    <% } %>
+    static options: <%= titlecase(name) %>PluginInitOptions = {};
+
+    static init(options: <%= titlecase(name) %>PluginInitOptions) {
+        this.options = options;
+        return <%= titlecase(name) %>Plugin;
+    }
+
+    constructor(
+        @Inject(<%= uppercase(name) %>_PLUGIN_OPTIONS) private options: <%= titlecase(name) %>PluginInitOptions,
+    ) {}
+}

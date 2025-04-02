@@ -1,0 +1,14 @@
+{
+  "executors": {
+    "copy-ui-extensions": {
+      "implementation": "./copyUiExtensionsImpl",
+      "schema": "./copy-ui-extensions-schema.json",
+      "description": "Copies over the UI extensions files to the built package"
+    },
+    "collect-ui-extensions": {
+      "implementation": "./collectUiExtensionsImpl",
+      "schema": "./collect-ui-extensions-schema.json",
+      "description": "Collects and copies all ui extension from all plugins into app"
+    }
+  }
+}
