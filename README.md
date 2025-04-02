@@ -23,6 +23,7 @@ This repo was generated as a standard [Nx Integrated Repo](https://nx.dev/gettin
   - **storefront**: Here's where you'd add your storefront app
 - **libs**
   - **util-config**: The VendureConfig which is shared by the server & worker.
+  - **util-testing**: Utils used for the e2e tests
   - **plugin-foo etc.**: When you create new Vendure plugins, create them as Nx libs and them import them into the VendureConfig in the `util-config` package.
 - **static**: Static assets needed by the server or worker, e.g. email template files.
 - **tools**: Custom Nx executors & generators.
@@ -62,3 +63,11 @@ So it should be sufficient to configure your hosting platform to clone the repo,
 ### Build internals
 
 When you run the `build` command, we use a custom Nx executor named "package" which you can find in [/tools/executors/package](./tools/executors/package). This executor will create a new `package.json` file for the server/worker which _only_ contain the run-time dependencies that they need, rather than the entire contents of the root `package.json`.
+
+## Generating a new Vendure plugin
+Execute the following command to generate a new Vendure plugin in the `libs` directory:
+
+```bash
+nx g vendure-nx:vendure-plugin-generator --name=Example --uiExtension=true
+```
+Read more about the `vendure-plugin-generator` in a dedicated readme file:  [tools/vendure-nx/README.md](tools/vendure-nx/README.md)
