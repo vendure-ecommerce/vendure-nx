@@ -1,0 +1,17 @@
+{
+  "extends": "../../../../../../server/tsconfig.json",
+  "compilerOptions": {
+    "types": ["jest", "node"],
+    "lib": ["es2015", "dom"],
+    "skipLibCheck": true,
+    "inlineSourceMap": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowJs": false
+  },
+  "include": [
+    "../../../nx/apps/server/src/plugins/**/*.e2e-spec.ts",
+    "../../../nx/apps/server/src/plugins/**/*.d.ts",
+    "../../../../../apps/server/src/custom-field-types.ts"
+  ]
+}

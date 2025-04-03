@@ -1,0 +1,9 @@
+import { AdminUiExtension } from '@vendure/ui-devkit/compiler';
+import path from 'path';
+
+export const uiExtensions: AdminUiExtension = {
+    id: '<%= filename %>',
+    extensionPath: path.join(process.cwd(), 'libs/<%= filename %>-plugin/src/ui'),
+    providers: ['providers.ts'],
+    routes: [{ route: '<%= filename %>', filePath: 'routes.ts' }],
+};

@@ -1,0 +1,27 @@
+{
+  "name": "plugin-example",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{workspaceRoot}/coverage/libs/plugin-example"],
+      "options": {
+        "config": "vite.config.ts"
+      }
+    },
+    "codegen": {
+      "executor": "./tools/executors/codegen:generate-plugin-types",
+      "options": {
+        "pluginPath": "libs/plugin-example/src",
+        "includeUi": true,
+        "includeE2eShop": true,
+        "includeE2eAdmin": true
+      }
+    }
+  },
+  "tags": []
+}
