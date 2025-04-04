@@ -1,2 +1,2 @@
 export const loggerCtx = '<%= titlecase(name) %>Plugin';
-export const <%= uppercase(filename) %>_PLUGIN_OPTIONS = Symbol('<%= uppercase(filename) %>_PLUGIN_OPTIONS');
+export const <%= constantcase(name) %>_PLUGIN_OPTIONS = Symbol('<%= constantcase(name) %>_PLUGIN_OPTIONS');
