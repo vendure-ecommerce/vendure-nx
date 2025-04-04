@@ -19,6 +19,17 @@ function uppercase(val: string) {
 
 /**
  * @description
+ * Convert a string to UPPERCASE with underscore separator.
+ * @param val
+ */
+function constantcase(val: string) {
+  return val.replace(/(?:^|\.?)([A-Z])/g, (x, y) => '_' + y)
+    .replace(/^_/, '')
+    .toUpperCase();
+}
+
+/**
+ * @description
  * Convert a string to TitleCase.
  * @param val
  */
@@ -84,6 +95,7 @@ export async function vendurePluginGenerator(
     uppercase,
     titlecase,
     kebabcase,
+    constantcase,
     filename: kebabcase(options.name),
     ...options,
   });
